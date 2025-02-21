@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    depends_on: 
+      - db
+  db:
+    image: postgres:17.3
+    platform: linux/amd64
+    user: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgres
+    ports:
+      - 5432:5432
+volumes:
+  pgdata:
